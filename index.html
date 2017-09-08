@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>[FSC] Peace Keepers: STT Fleet Home Page</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" integrity="sha384-Nlo8b0yiGl7Dn+BgLn4mxhIIBU6We7aeeiulNCjHdUv/eKHx59s3anfSUjExbDxn" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="lcars/css/lcars.css" />
+<link rel="stylesheet" type="text/css" href="css/fonts.css" />
+<link rel="stylesheet" type="text/css" href="css/home.css" />
+</head>
+<body style="background-image: url(grafix/federation.png); background-repeat: no-repeat; background-size:cover;">
+<div class="lcars-row">
+    <div class="lcars-column u-3-12 lcars-elbow left top lcars-tan-bg">
+    </div>
+    <div class="lcars-column u-6-12 lcars-divider bottom lcars-tan-blue-divide">
+    </div>
+    <div class="lcars-column u-3-12 lcars-elbow right top lcars-tan-bg"><span class="lcars-rvs">LCARS: LIBRARY COMPUTER ACCESS</span>
+    </div>
+</div>
+<div class="lcars-row">
+    
+    <h1><span class="farscape" style="font-size:250%;">[FSC] PEACE KEEPERS</span></h1>
+    <h1><span class="trek">a STAR TREK TIMELINES FLEET</span></h1>
+</div>
+<div class="lcars-row">
+    <div class="lcars-column u-3-12 lcars-elbow left bottom lcars-blue-bg"></div>
+    <div class="lcars-column u-8-12 lcars-divider top lcars-blue-tan-divide"></div>
+    <div id="appExit" class="lcars-column u-1-12 lcars-elbow right bottom lcars-blue-bg"></div>
+</div>
+<div class="lcars-row">
+    <div class="lcars-column u-3-12">
+        <ul class="lcars-menu left">
+            <li class="lcars-tan-bg medium"><span class="lcars-rvs"><a href="https://www.facebook.com/groups/startrektimelinesfsc/" class="subspace" target="_blank">SUBSPACE LINK: FACEBOOK</a></li>
+            <li class="lcars-tan-bg medium"><span class="lcars-rvs"><a href="https://discordapp.com/invite/am375WU" class="subspace" target="_blank">SUBSPACE LINK: DISCORD</a></li>
+            <li class="lcars-tan-bg medium app-launch" data-app-id="srb"><span class="lcars-rvs">SERVICE RECORD BUILDER</span></li>
+            <li class="lcars-tan-bg medium app-launch" data-app-id="fleet"><span class="lcars-rvs">FLEET HONORS</span></li>
+            <li class="lcars-blue-bg very-tall"><img src="grafix/ncc1701d_schem_small.png"></span></li>
+        </ul>
+    </div>
+    <div class="lcars-column u-9-12">
+        <span class="lcars" id="contentPane">
+        </span>
+    </div>
+</div>
+<div class="lcars-row">
+    <div class="lcars-column u-3-12 lcars-elbow left top lcars-blue-bg"></div>
+    <div class="lcars-column u-8-12 lcars-divider bottom lcars-blue-tan-divide"></div>
+    <div id="appExit" class="lcars-column u-1-12 lcars-elbow right top lcars-blue-bg"></div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha384-Dziy8F2VlJQLMShA6FHWNul/veM9bCkRUaLqr199K94ntO5QUrLJBEbYegdSkkqX" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function (){
+        $("#contentPane").load("content/welcome_template.html");
+        $(".subspace").click(function () {
+            var subspace = new Audio("audio/computerbeep_40.mp3");
+            subspace.play();
+        });
+        $(".app-launch").click(function () {
+            var activate = new Audio("audio/computerbeep_5.mp3");
+            activate.play();
+            var appName = $(this).attr('data-app-id');
+            $("#contentPane").load("content/application_" + appName + ".html");
+            $("#contentPane").hide().fadeIn();
+            $("#appExit").switchClass("lcars-blue-bg", "lcars-red-bg", 200)
+                .html("<span class='glyphicon glyphicon-remove-sign' style='position: relative; top: 20px; font-size: 200%;'></span>");
+        });
+        $(".app-unavailable").click(function () {
+            var nope = new Audio("audio/computer_error.mp3");
+            nope.play();
+        });
+        $("#appExit").click(function () {
+            if ($("#appExit").hasClass("lcars-red-bg")) {
+                $("#appExit").switchClass("lcars-red-bg", "lcars-blue-bg", 200)
+                    .html("");
+                $("#contentPane").load("content/welcome_template.html");
+            }
+	});
+        $(document).keydown(function(e) {
+            if ((e.keyCode === 27) && $("#appExit").hasClass("lcars-red-bg")) {
+                $('#appExit').click();   // esc
+            }
+        });
+   });
+</script>
+</body>
+</html>

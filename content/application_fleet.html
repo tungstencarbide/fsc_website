@@ -1,0 +1,64 @@
+<div class="lcars-row">
+    <div class="lcars-column u-11-12 lcars-divider bottom lcars-grayBlue-blue-divide">
+     <span class="lcars">FLEET HONORS</span>
+    </div>
+    <div class="lcars-column u-1-12 lcars-elbow right top lcars-blue-bg">
+    </div>
+</div>
+<div class="lcars lcars-row">
+    <div class="lcars-column u-12-12">
+        <table id="honorsTable" style="width: 100%;">
+            <tr><th>EVENT</th><th>STARDATE</th><th>RANK</th></tr>
+        </table>
+    </div>
+</div>
+<div class="lcars lcars-row">
+    <div class="lcars-column u-11-12 lcars-divider lcars-grayBlue-blue-divide">
+    </div>
+</div>
+<script>
+    
+    function addFHRow() {
+        if (fhIndex == fleetHonors.length) {
+            clearInterval(fhInterval);
+            return;
+        }
+        var curHonor = fleetHonors[fhIndex++];
+        var newRow = $("<tr class='fleet-honor'><td>"+curHonor.event+"</td><td>"+curHonor.stardate+"</td><td>"+curHonor.rank+"</td></tr>");
+        if (curHonor.rank < topRank) {
+            $(".best-rank").removeClass("best-rank");
+            newRow.addClass('best-rank');
+            topRank = curHonor.rank;
+        }
+        newRow.hide();
+        $("#honorsTable tr:last").after(newRow);
+        newRow.fadeIn("slow");
+        var beep = new Audio("audio/computerbeep_5.mp3");
+        beep.play(); 
+    }
+    topRank = 999999;
+    fhIndex = 0;
+    $(document).ready(function() {
+        $(".fleet-honor").remove();
+        fhInterval = setInterval(addFHRow, 100);
+        fhIndex = 0;
+    });
+    fleetHonors = [
+        {'event' : 'Second Act',
+         'stardate' : '2017.09.07',
+         'rank' : "<span class='blink' style='color: #0e0;'>IN PROGRESS&hellip;</span>"
+        },
+        {'event' : 'Our Thoughts Combined',
+         'stardate' : '2017.08.31',
+         'rank' : 348
+        },
+        {'event' : 'Contingency Plan',
+         'stardate' : '2017.08.24',
+         'rank' : 290
+        },
+        {'event' : 'Homestead',
+         'stardate' : '2017.08.18',
+         'rank' : 395
+        },
+    ];
+</script>

@@ -1,0 +1,75 @@
+body {
+    margin: 0 auto;
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+}
+
+body .trek {
+    font-family: Trek, Tahoma, Verdana, Arial, sans-serif;
+    color: #18a0c0;
+}
+
+body .farscape {
+    font-family: Farscape, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 125%;
+    color: #d8d820;
+}
+
+body .lcars {
+    font-family: Lcars, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 150%;
+    color: #ffff00;
+}
+
+input[type="text"], input[readonly="readonly"], input[readonly] {
+    font-family: Lcars, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 125%;
+    color: #ffff00;
+    background-color: #000!important;
+}
+ 
+body .lcars-rvs {
+    font-family: Lcars, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 150%;
+    color: #000000;
+}
+
+body .lcars-white {
+    font-family: Lcars, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 150%;
+    color: #ffffff;
+}
+
+body .blink {
+    animation: blinker 1s linear infinite;
+}
+
+body .best-rank {
+    animation: swell 1s ease infinite;
+    color: #ffffff;
+}
+
+.srb-pulldown {
+     background-color: black;
+    margin: 5px;
+}
+
+.srb-option {
+    margin: 5px;
+    float: none;
+    background-color: #99f;
+}
+@keyframes blinker {
+   50% { opacity: 0;}
+}
+
+@keyframes swell {
+    50% {border: 2px;}
+}
+
+.border-off {
+    border: 0;
+    box-shadow: none;
+}

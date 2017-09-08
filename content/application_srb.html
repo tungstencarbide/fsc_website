@@ -1,0 +1,267 @@
+<div class="lcars-row">
+    <div class="lcars-column u-11-12 lcars-divider bottom lcars-purple-tan-divide"><span class="lcars">SERVICE RECORD BUILDER (SRB)</span>
+    </div>
+    <div class="lcars-column u-1-12 lcars-elbow right top lcars-tan-bg">
+    </div>
+</div>
+<div class="row lcars lcars-row">
+    <form class="form">
+        <div class="form-group">
+            <label for="srbCallsign" class="control-label col-sm-2">CALLSIGN:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control srb-option srb-callsign" id="srbCallsign" />
+            </div>
+        </div>
+        <div class="row"><div class="col-sm-12">&nbsp;</div></div>
+        <div class="form-group">
+            <label for="srbRank" class="control-label col-sm-2">RANK:</label>
+            <div class="col-sm-4">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle lcars-button radius" data-toggle="dropdown" type="button" id="srbRankButton"><span class="lcars-rvs">SELECT RANK</span></button>
+                    <div class="dropdown-menu srb-pulldown" id="srbRankList" aria-labelledby="srbRankButton">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row"><div class="col-sm-12">&nbsp;</div></div>
+        <div class="form-group">
+            <label for="srbDivision" class="control-label col-sm-2">DIVISION:</label>
+            <div class="col-sm-4">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle lcars-button radius" data-toggle="dropdown" type="button" id="srbDivisionButton">
+                        <span class="lcars-rvs">SELECT SERVICE DIVISION</span>
+                    </button>
+                    <div class="dropdown-menu srb-pulldown" id="srbDivisionList" aria-labelledby="srbDivisionButton">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row"><div class="col-sm-12">&nbsp;</div></div>
+        <div class="row">
+            <div class="form-group">
+                <label for="srbTag" class="control-label col-sm-2">IN-GAME TAG:</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control srb-tag border-off" id="srbTag" readonly="readonly"/>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn lcars-button right" id="srbTagCopy"><span class="glyphicon glyphicon-copy" style="font-size: 150%;"></span></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    srbValue = {
+        rankInsig : "",
+        rankAbbr : "",
+        callsign : "",
+        divInsig : ""
+    }
+    $(document).ready(function (){
+        var ranks = {
+            "Flag Officer" : {
+                divider : true
+            },
+            "Fleet Admiral" : {
+                abbrev : "FAd",
+                insig : "[>>>>]",
+                enabled : false,
+            },
+            "Vice Fleet Admiral" : {
+                abbrev : "VFAd",
+                insig : "[>>>]",
+                enabled : false,
+            },
+            "Admiral" : {
+                abbrev : "Adm",
+                insig : "[****]",
+                enabled : true,
+            },
+            "Vice Admiral" : {
+                abbrev : "VAdm",
+                insig : "[***]",
+                enabled : true,
+            },
+            "Rear Admiral": {
+                abbrev : "RAdm",
+                insig : "[**]",
+                enabled : true,
+            },
+            "Commodore": {
+                abbrev : "Cmdr",
+                insig : "[*]",
+                enabled : true,
+            },
+            "Officer" : {
+                divider : true
+            },
+            "Captain": {
+                abbrev : "Cpt",
+                insig : "****",
+                enabled : true,
+            },
+            "Senior Commander": {
+                abbrev : "SrCmd",
+                insig : "I***",
+                enabled : true,
+            },
+            "Commander": {
+                abbrev : "Cmd",
+                insig : "***",
+                enabled : true,
+            },
+            "Commander": {
+                abbrev : "Cmd",
+                insig : "***",
+                enabled : true,
+            },
+            "Lieutenant Commander": {
+                abbrev : "Cmd",
+                insig : "I**",
+                enabled : true,
+            },
+            "Lieutenant": {
+                abbrev : "Lt",
+                insig : "**",
+                enabled : true,
+            },
+            "Lieutenant, Junior Grade": {
+                abbrev : "LtJG",
+                insig : "I*",
+                enabled : true,
+            },
+            "Ensign": {
+                abbrev : "Ens",
+                insig : "*",
+                enabled : true,
+            },
+            "Non-Commissioned Officer" : {
+                divider : true
+            },
+            "Senior Chief Petty Officer": {
+                abbrev : "SCPO",
+                insig : "^I",
+                enabled : true,
+            },
+            "Chief Petty Officer": {
+                abbrev : "CPO",
+                insig : "^i",
+                enabled : true,
+            },
+            
+            "Rating" : {
+                divider : true
+            },
+            "Crew First Class": {
+                abbrev : "crw1",
+                insig : "iiii^",
+                enabled : true,
+            },
+            "Crew Second Class": {
+                abbrev : "crw2",
+                insig : "iii^",
+                enabled : true,
+            },
+            "Crew Third Class": {
+                abbrev : "crw3",
+                insig : "ii^",
+                enabled : true,
+            },
+            "Crew Fourth Class": {
+                abbrev : "crw4",
+                insig : "i^",
+                enabled : true,
+            },
+            "Trainee" : {
+                divider : true
+            },
+            "Cadet First Class": {
+                abbrev : "cdt1",
+                insig : "iiii",
+                enabled : true,
+            },
+            "Cadet Second Class": {
+                abbrev : "cdt2",
+                insig : "iii",
+                enabled : true,
+            },
+            "Cadet Third Class": {
+                abbrev : "cdt3",
+                insig : "ii",
+                enabled : true,
+            },
+            "Cadet Fourth Class": {
+                abbrev : "cdt4",
+                insig : "i",
+                enabled : true,
+            },
+
+        };
+        var division = {
+            "Command" : {
+                insig : "[^]",
+            },
+            "Science" : {
+                insig : "[%]",
+            },
+            "Engineering/Logistics" : {
+                insig : "[@]",
+            },
+            "Medical" : {
+                insig : "[+]",
+            },
+            "Diplomacy" : {
+                insig : "{O}",
+            },
+            "Security" : {
+                insig : "{@}",
+            },
+        };
+        for (var key in division) {
+            var newItem = "<a class='lcars-button left dropdown-item lcars-rvs srb-option srb-division-option' data-insignia='" + division[key].insig + "'>" + key.toUpperCase() + "</a>";
+            $("#srbDivisionList").append(newItem);
+        }
+        for (var key in ranks) {
+            var curRank = ranks[key];
+            if (!curRank.enabled) continue;
+            var newItem = "<a class='lcars-button left dropdown-item lcars-rvs srb-option srb-rank-option' data-insignia='" + ranks[key].insig + "' data-abbr='" + ranks[key].abbrev + "'>" + key.toUpperCase() + "<br></a>";
+            $("#srbRankList").append(newItem);
+        }
+        $('.dropdown-toggle').dropdown();
+        $('.srb-option').click(function () {
+            srbRenderTag(this);
+        });
+        $('.srb-option').keyup(function () {
+            srbRenderTag(this);
+        });
+    });
+    $("#srbTagCopy").click(function (evt) {
+        var toCopy = document.querySelector('.srb-tag');
+        toCopy.select();
+        document.execCommand('copy');
+        document.getSelection().removeAllRanges();
+        evt.preventDefault();
+    });
+    function srbRenderTag(changed) {
+        changed = $(changed);
+        if (changed.hasClass('srb-division-option')) {
+            console.log("changed division: ", changed.text(), changed.attr('data-insignia'));
+            srbValue.divInsig = changed.attr('data-insignia');
+        }
+        else if (changed.hasClass('srb-rank-option')) {
+            console.log("changed rank: ", changed.text(), changed.attr('data-insignia'));
+            srbValue.rankInsig = changed.attr('data-insignia');
+            srbValue.rankAbbr = changed.attr('data-abbr');
+        }
+        else if (changed.hasClass('srb-callsign')) {
+            console.log("changed callsign: ", changed.val());
+            srbValue.callsign = changed.val();
+        }
+        var tag = "[FSC]" + srbValue.rankAbbr + ": " + srbValue.callsign + ' ' + srbValue.divInsig + srbValue.rankInsig;
+        var color = "#0f0";
+        if (tag.length > 32) {
+            color = "#f00";
+        }
+        $("#srbTag").css("color", color).val(tag);
+    }
+</script>
