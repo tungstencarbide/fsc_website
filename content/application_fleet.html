@@ -38,6 +38,8 @@
     }
     topRank = 999999;
     fhIndex = 0;
+    var inProgress = "<span class='blink' style='color: #0e0;'>IN PROGRESS&hellip;</span>";
+    var waiting = "<span class='blink' style='color: #e00;'>IN PROGRESS&hellip;</span>";
     $(document).ready(function() {
         $(".fleet-honor").remove();
         fhInterval = setInterval(addFHRow, 100);
@@ -46,7 +48,7 @@
     fleetHonors = [
         {'event' : 'Second Act',
          'stardate' : '2017.09.07',
-         'rank' : "<span class='blink' style='color: #0e0;'>IN PROGRESS&hellip;</span>"
+         'rank' : 369
         },
         {'event' : 'Our Thoughts Combined',
          'stardate' : '2017.08.31',
