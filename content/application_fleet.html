@@ -39,13 +39,18 @@
     topRank = 999999;
     fhIndex = 0;
     var inProgress = "<span class='blink' style='color: #0e0;'>IN PROGRESS&hellip;</span>";
-    var waiting = "<span class='blink' style='color: #e00;'>IN PROGRESS&hellip;</span>";
+    var waiting = "<span class='blink' style='color: #e00;'>WAITING&hellip;</span>";
     $(document).ready(function() {
         $(".fleet-honor").remove();
         fhInterval = setInterval(addFHRow, 100);
         fhIndex = 0;
     });
     fleetHonors = [
+        {
+         'event' : 'Guilty As Charged',
+         'stardate' : '2017.09.14',
+         'rank' : waiting 
+        },
         {'event' : 'Second Act',
          'stardate' : '2017.09.07',
          'rank' : 369
