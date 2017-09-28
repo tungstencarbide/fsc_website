@@ -22,7 +22,7 @@
         if (fhIndex == fleetHonors.length) {
             clearInterval(fhInterval);
             $("#honorsTable tr:last").after(fleetAvgRow);
-            $("#fleetRankAvg").html("<span class='lcars'>" + rankSum/rankCount + "</span>");
+            $("#fleetRankAvg").html("<span class='lcars'>" + parseInt(rankSum/rankCount*10)/10 + "</span>");
             return;
         }
         var curHonor = fleetHonors[fhIndex++];
@@ -56,9 +56,14 @@
     });
     fleetHonors = [
         {
+         'event' : 'Gates Of Hell',
+         'stardate' : '2017.09.28',
+         'rank' : waiting
+        },
+        {
          'event' : 'Retrograde',
          'stardate' : '2017.09.21',
-         'rank' : inProgress
+         'rank' : 361
         },
         {
          'event' : 'Guilty As Charged',
