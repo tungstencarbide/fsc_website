@@ -23,6 +23,14 @@ body .lcars {
     color: #ffff00;
 }
 
+span .y-axis {
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+    font-size: 100%;
+    float: left;
+}
+
 input[type="text"], input[readonly="readonly"], input[readonly] {
     font-family: Lcars, Tahoma, Verdana, Arial, sans-serif;
     font-size: 125%;
@@ -73,3 +81,4 @@ body .best-rank {
     border: 0;
     box-shadow: none;
 }
+
