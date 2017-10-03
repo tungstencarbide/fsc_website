@@ -6,9 +6,9 @@
     </div>
 </div>
 <div class="lcars lcars-row">
-    <div class="lcars-column u-12-12">
+    <div class="lcars-column u-12-12" style="overflow-x:auto; overflow-y:auto;">
         <table id="honorsTable" style="width: 100%;">
-            <tr><th>EVENT</th><th>STARDATE</th><th>RANK</th></tr>
+            <tr><th></th><th>EVENT</th><th>STARDATE</th><th>RANK</th></tr>
         </table>
     </div>
 </div>
@@ -26,7 +26,14 @@
             return;
         }
         var curHonor = fleetHonors[fhIndex++];
-        var newRow = $("<tr class='fleet-honor'><td>"+curHonor.event+"</td><td>"+curHonor.stardate+"</td><td>"+curHonor.rank+"</td></tr>");
+        var megaText = "<td></td>";
+        if (curHonor.mega > 0) {
+            megaText = "<td rowspan='" + curHonor.mega + "'><div class='lcars y-axis'>" + curHonor.megatitle + "</div></td>"; 
+        }
+        else if (curHonor.mega < 0) {
+            megaText = "";
+        }
+        var newRow = $("<tr class='fleet-honor'>" + megaText + "<td>"+curHonor.event+"</td><td>"+curHonor.stardate+"</td><td>"+curHonor.rank+"</td></tr>");
         if (curHonor.rank > 0) {
             rankSum += curHonor.rank;
             rankCount++;
@@ -50,15 +57,40 @@
     var waiting = "<span class='blink' style='color: #e00;'>WAITING&hellip;</span>";
     $(document).ready(function() {
         $(".fleet-honor").remove();
-        fleetAvgRow = $("<tr class='fleet-honor'><td></td><td><span class='lcars'>AVERAGE:</td><td><span id='fleetRankAvg'></span></td></tr>")
+        fleetAvgRow = $("<tr class='fleet-honor'><td></td><td></td><td><span class='lcars'>AVERAGE:</td><td><span id='fleetRankAvg'></span></td></tr>")
         fhIndex = 0;
         fhInterval = setInterval(addFHRow, 100);
     });
     fleetHonors = [
         {
+         'mega' : 4,
+         'megatitle' : "DISCOVERY:<br />A NEW ANOMALY",
+         'event' : 'Powderkeg',
+         'stardate' : '2017.10.26',
+         'rank' : waiting
+        },
+        {
+         'mega' : -1,
+         'event' : 'The Wrong Place',
+         'stardate' : '2017.10.19',
+         'rank' : waiting
+        },
+        {
+         'mega' : -1,
+         'event' : 'Lock And Load',
+         'stardate' : '2017.10.12',
+         'rank' : waiting
+        },
+        {
+         'mega' : -1,
+         'event' : 'Streak Of Stardust',
+         'stardate' : '2017.10.05',
+         'rank' : waiting
+        },
+        {
          'event' : 'Gates Of Hell',
          'stardate' : '2017.09.28',
-         'rank' : waiting
+         'rank' : 364
         },
         {
          'event' : 'Retrograde',
