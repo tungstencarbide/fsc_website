@@ -59,6 +59,10 @@ body .best-rank {
     color: #ffffff;
 }
 
+body .fleet-honor-mega {
+    background-color: #20202080;
+}
+
 .srb-pulldown {
      background-color: black;
     margin: 5px;

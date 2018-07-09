@@ -27,13 +27,16 @@
         }
         var curHonor = fleetHonors[fhIndex++];
         var megaText = "<td></td>";
+        var megaClass = "";
         if (curHonor.mega > 0) {
-            megaText = "<td rowspan='" + curHonor.mega + "'><div class='lcars y-axis'>" + curHonor.megatitle + "</div></td>"; 
+            megaText = "<td rowspan='" + curHonor.mega + "'><div class='lcars y-axis'>" + curHonor.megatitle + "</div></td>";
+            megaClass = " fleet-honor-mega";
         }
         else if (curHonor.mega < 0) {
             megaText = "";
+            megaClass = " fleet-honor-mega";
         }
-        var newRow = $("<tr class='fleet-honor'>" + megaText + "<td>"+curHonor.event+"</td><td>"+curHonor.stardate+"</td><td>"+curHonor.rank+"</td></tr>");
+        var newRow = $("<tr class='fleet-honor" + megaClass + "''>" + megaText + "<td>"+curHonor.event+"</td><td>"+curHonor.stardate+"</td><td>"+curHonor.rank+"</td></tr>");
         if (curHonor.rank > 0) {
             rankSum += curHonor.rank;
             rankCount++;
@@ -63,60 +66,59 @@
     });
     fleetHonors = [
         {
+         'event' : 'Kosst Kejal',
+         'stardate' : '2018.07.05',
+         'rank' : inProgress
+        },
+        {
+         'event' : 'The Isthmian Games',
+         'stardate' : '2018.06.28',
+         'rank' : 223 
+        },
+        {
          'mega' : 4,
-         'megatitle' : "DISCOVERY:<br />A NEW ANOMALY",
-         'event' : 'Powderkeg',
-         'stardate' : '2017.10.26',
-         'rank' : waiting
+         'megatitle' : 'Superior Ambition',
+         'event' : 'The Weak Will Perish',
+         'stardate' : '2018.06.21',
+         'rank' : 196
         },
         {
          'mega' : -1,
-         'event' : 'The Wrong Place',
-         'stardate' : '2017.10.19',
-         'rank' : waiting
+         'event' : 'A Quiet Coup',
+         'stardate' : '2018.06.14',
+         'rank' : 245
         },
         {
          'mega' : -1,
-         'event' : 'First Impressions',
-         'stardate' : '2017.10.12',
-         'rank' : 388
+         'event' : 'Turning Point',
+         'stardate' : '2018.06.07',
+         'rank' : 196
         },
         {
          'mega' : -1,
-         'event' : 'Streak Of Stardust',
-         'stardate' : '2017.10.05',
-         'rank' : 287
+         'event' : 'Catching Fire',
+         'stardate' : '2018.05.31',
+         'rank' : 143
         },
         {
-         'event' : 'Gates Of Hell',
-         'stardate' : '2017.09.28',
-         'rank' : 364
+         'event' : 'The Longest Day',
+         'stardate' : '2018.05.24',
+         'rank' : 286
         },
         {
-         'event' : 'Retrograde',
-         'stardate' : '2017.09.21',
-         'rank' : 361
+         'event' : 'The Butchers of Beta Penthe',
+         'stardate' : '2018.05.17',
+         'rank' : 286
         },
         {
-         'event' : 'Guilty As Charged',
-         'stardate' : '2017.09.14',
-         'rank' : 252 
+         'event' : 'Reverie In Prime',
+         'stardate' : '2018.05.10',
+         'rank' : 261
         },
-        {'event' : 'Second Act',
-         'stardate' : '2017.09.07',
-         'rank' : 369
-        },
-        {'event' : 'Our Thoughts Combined',
-         'stardate' : '2017.08.31',
-         'rank' : 348
-        },
-        {'event' : 'Contingency Plan',
-         'stardate' : '2017.08.24',
-         'rank' : 290
-        },
-        {'event' : 'Homestead',
-         'stardate' : '2017.08.18',
-         'rank' : 395
+        {
+         'event' : 'Ruile 125',
+         'stardate' : '2018.05.03',
+         'rank' : 223
         },
     ];
 </script>
